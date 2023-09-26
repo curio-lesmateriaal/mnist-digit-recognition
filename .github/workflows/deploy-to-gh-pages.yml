@@ -17,6 +17,7 @@ jobs:
         run: |
           cd web_app
           npm ci
+          rm .gitignore
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
