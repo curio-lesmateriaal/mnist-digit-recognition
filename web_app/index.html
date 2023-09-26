@@ -27,6 +27,11 @@
     const context = canvas.getContext('2d');
     let isDrawing = false;
 
+    // We MUST fill the canvas with white before drawing on it, otherwise the
+    // all the pixels will be 0 (nothing) and writing black on it will add to
+    // more of nothing.
+    // By setting it to white all the pixels will become 255 and writing black
+    // on it will result in clearly visible black lines.
     function clear() {
       context.fillStyle = 'white';
       context.fillRect(0, 0, canvas.width, canvas.height);
