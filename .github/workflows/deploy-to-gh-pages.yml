@@ -18,6 +18,7 @@ jobs:
           cd web_app
           npm ci
           rm .gitignore
+          touch .nojekyll
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
