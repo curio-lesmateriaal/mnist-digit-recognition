@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    canvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="drawingCanvas" width="256" height="256"></canvas>
+  <button id="clearAction">Clear</button>
+  <button id="predictionAction">Predict!</button>
+  <div>
+    This is a <span id="prediction"></span> (Confidence: <span id="confidence"></span>)
+  </div>
+
+  <script>
+    // Simply allows drawing on the canvas with the cursor
+    const canvas = document.getElementById('drawingCanvas');
+    const buttonClear = document.getElementById('clearAction');
+    const button = document.getElementById('predictionAction');
+    const context = canvas.getContext('2d');
+    let isDrawing = false;
+
+    function clear() {
+      context.fillStyle = 'white';
+      context.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    clear();
+    buttonClear.addEventListener('click', clear);
+
+    button.addEventListener('click', () => {
+      const { index, probability } = predict(canvas);
+
+      document.getElementById('prediction').innerText = index;
+      document.getElementById('confidence').innerText = probability;
+    });
+
+    function startDrawing(event) {
+      isDrawing = true;
+      draw(event);
+    }
+
+    function stopDrawing() {
+      isDrawing = false;
+      context.beginPath();
+    }
+
+    function draw(event) {
+      if (isDrawing) {
+        context.lineWidth = 20;
+        context.lineCap = 'round';
+        context.strokeStyle = 'black';
+        context.lineTo(event.clientX, event.clientY);
+        context.stroke();
+        context.beginPath();
+        context.moveTo(event.clientX, event.clientY);
+      }
+    }
+
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDrawing);
+  </script>
+  
+  <script type="importmap">
+    {
+      "imports": {
+        "@tensorflow/tfjs": "./node_modules/@tensorflow/tfjs/dist/tf.js",
+        "@tensorflow/tfjs-converter": "./node_modules/@tensorflow/tfjs-converter/dist/tf-converter.js"
+      }
+    }
+  </script>
+  <script defer type="module" src="app.js"></script>
+</body>
+</html>
