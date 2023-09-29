@@ -4,6 +4,10 @@ Deze repo bevat een opgeslagen TensorFlow model ([`saved_model.pb`](./saved_mode
 
 Het script om het model te converteren is te vinden in [`convert.sh`](./convert.sh) in de root van deze repo. Dit script is gebaseerd op [deze tutorial](https://www.tensorflow.org/js/tutorials/conversion/import_saved_model) en vereist Python 3.6+.
 
+## Training data
+
+Om een beeld te krijgen van de training data kun je [deze website](https://observablehq.com/@davidalber/mnist-browser) gebruiken. Als je op deze site kijkt naar bijvoorbeeld het cijfer '2' zie je dat er erg weinig training data is voor dat cijfer geschreven op [deze manier](https://github.com/curio-lesmateriaal/mnist-digit-recognition/assets/2738114/ec70d9cd-75be-40cf-83cf-61e703b9bbef). Dat kan verklaren waarom de classificering van die schrijfwijze soms onjuist is.
+
 ## Direct aan de slag
 
 1. Clone deze repo
